@@ -25,7 +25,6 @@ current_data=''
 # Add in XBee 64-bit addresses
 XBeeReference.append('\x00\x00\x00\x00\x00\x00\x00\x00')
 
-
 # When a packet is recieved, place it in the packets queue.
 packets = Queue.Queue()
 # Open serial port
@@ -97,22 +96,13 @@ def collect_data():
         time.sleep(2)
         while XBeeStatus[x] != 12:
             if (time.clock()-start)>30:
-                #xbee.send('tx',dest_addr_long=XBeeAddress[x],dest_addr=UNKNOWN,data=b'D')
-                #XBeeStatus[x]=0
-                #current_data=''
-                #start = time.clock()
-                #print ("Re-sent DATA_SEND to {0}".format(x))
-                #time.sleep(2)
                 XBeeStatus[x]=12
                 print('Did not recieve data')
                 current_data=1594*'0'
-            try:
-                if packets.qsize() > 0:
-                    newPacket = packets.get_nowait()
-                    handlePacket(newPacket)
-                    #print XBeeStatus
-            except KeyboardInterrupt:
-                    break      
+            if packets.qsize() > 0:
+                newPacket = packets.get_nowait()
+                handlePacket(newPacket)
+                print XBeeStatus      
 
         save_path = '/media/usbhdd'
         filename = os.path.join(save_path,XBeeFilenames[x])  
