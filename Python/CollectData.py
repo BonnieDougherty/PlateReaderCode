@@ -110,7 +110,7 @@ def collect_data():
                 if packets.qsize() > 0:
                     newPacket = packets.get_nowait()
                     handlePacket(newPacket)
-                    print XBeeStatus
+                    #print XBeeStatus
             except KeyboardInterrupt:
                     break      
 
