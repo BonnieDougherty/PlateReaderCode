@@ -146,6 +146,7 @@ if __name__ == '__main__':
     # Ask for specific file names for each XBee ID:
     for x in range(0,len(XBeeID)):
         XBeeFilenames.append(raw_input("Identifier {0} filename:".format(XBeeID[x])))
+        # Change save_file to the file destination for your server
         save_file = '/media/usbhdd/'
         file_name = os.path.join(save_file,XBeeFilenames[x])
         current_file = open(file_name,'w')
