@@ -11,7 +11,13 @@ BAUD_RATE = 9600
 ser = serial.Serial(PORT,BAUD_RATE)
 xbee = ZigBee(ser,escaped=True)
 
+def handlePacket(data):
+    print data
+
 if __name__ == '__main__':
-	# Code to be executed when file is called directly
-	xbee.send("at",command="MY")
-	print(xbee.wait_read_frame())
+    # Code to be executed when file is called directly
+    xbee.send("at",command="MY")
+    print(xbee.wait_read_frame())
+    xbee.halt()
+    ser.close()
+    
